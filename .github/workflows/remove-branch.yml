@@ -1,9 +1,3 @@
-
-## 🚀 Usage
-
-Create a file named `remove-branch.yml` inside the `.github/workflows` directory and paste:
-
-```yml
 name: Remove branch
 
 on:
@@ -13,8 +7,7 @@ jobs:
   remove-branch:
     runs-on: ubuntu-latest
     steps:
-      - uses: mn185177/delete-branch@v1
+      - uses: actions/checkout@v1
+      - uses: ./
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-```
-
