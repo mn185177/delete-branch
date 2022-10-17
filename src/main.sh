@@ -19,6 +19,8 @@ main() {
 
   if str::contains "$branch_name" "refs/tags"; then
     log::message "Tag not removed!"
+  elif [[$branch_name == +(qa|main|master|rel)]]; then
+    log::message "Protected branch will not be deleted"
   else
     github::delete_ref "$branch_name"
 
