@@ -14,16 +14,14 @@ main() {
   export GITHUB_TOKEN="$1"
 
   local -r branch_name="$GITHUB_REF"
-  country="portugal"
+  
   modified_branch=${branch_name:11}
 
   log::message "$modified_branch"
   log::message "$branch_name"
 
-  if str::contains "$branch_name" "refs/tags"; then
-    log::message "Tag not removed!"
-  if [[ $modified_branch == @(qa|main|master|rel-*|fssre-*) ]]; then
-    log::message "Protected branch will not be deleted"
+  if [[ $modified_branch == @(qa|main|master|rel-*|fssre-*) ]] || str::contains "$branch_name" "refs/tags"; then
+    log::message "Protected branch or Tag will not be deleted"
   else
     github::delete_ref "$branch_name"
 
